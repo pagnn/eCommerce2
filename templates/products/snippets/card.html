@@ -1,7 +1,7 @@
 <div class="card" style="width: 20rem;">
 	{% if instance.image %}
 	<a href="{{ instance.get_absolute_url }}">
-		<img class="card-img-top" src="{{ instance.image.url }}" alt="{{ instance.title }}">
+		<img class="card-img-top" src="{% if instance.image.url %}{{ instance.image.url }}{% else %}https://static1.squarespace.com/static/5952e36fa5790afbc22806b9/5953088bb8a79b2b34774e53/5a1db962e2c483f5ad67eed5/1511897447609/jil+sander+cashmere+11.jpg?format=1000w{% endif %}" alt="{{ instance.title }}">
 	</a>
 	{% endif %}
   	<div class="card-body">
