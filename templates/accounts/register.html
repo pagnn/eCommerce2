@@ -6,12 +6,12 @@
     </div>
 
     <div class='row'>
-      <div class='col-4 mx-auto'>
-      <form method='POST' action='.'>{% csrf_token %}
+      <div class='col-12 col-md-4 ml-auto mr-auto'>
+      <form class='form' method='POST' action='.'>{% csrf_token %}
         {{ form.as_p }}   
      <div class='row'>
-      <div class='col-4 ml-auto mr-auto'>             
-        <button type='submit' class='btn btn-dafault'>Submit</button>
+      <div class='col-12 col-md-4 ml-auto mr-auto'>             
+        <button type='submit' class='btn btn-primary'>Submit</button>
       </div>
     </div>
       </form>

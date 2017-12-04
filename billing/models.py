@@ -28,7 +28,7 @@ class BillingProfileManager(models.Manager):
 
 
 class BillingProfile(models.Model):
-	user = models.OneToOneField(User,null=True,blank=True)
+	user = models.ForeignKey(User,null=True,blank=True)
 	email = models.EmailField()
 	customer_id=models.CharField(max_length=120,null=True,blank=True)
 	active = models.BooleanField(default=True)
