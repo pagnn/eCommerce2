@@ -1,2 +1,62 @@
 [
+{
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+        "title": "Velve Dress",
+        "slug": "velvedress",
+        "description": "This is a awesome Velve Dress",
+        "price": "39.99",
+        "image": "products/738300250/738300250.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2017-12-04T03:33:54.795Z",
+        "is_digital": false
+    }
+},
+{
+    "model": "products.product",
+    "pk": 10,
+    "fields": {
+        "title": "Velve Blouse",
+        "slug": "velveblouse",
+        "description": "This is a awesome Velve Blouse",
+        "price": "39.99",
+        "image": "products/1368121114/1368121114.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2017-12-04T03:34:35.356Z",
+        "is_digital": false
+    }
+},
+{
+    "model": "products.product",
+    "pk": 11,
+    "fields": {
+        "title": "Cashmere Sweater",
+        "slug": "cashemeresweater",
+        "description": "This  is an awesome Cashmere Sweater.",
+        "price": "39.99",
+        "image": "products/3770086471/3770086471.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2017-12-04T03:35:27.799Z",
+        "is_digital": false
+    }
+},
+{
+    "model": "products.product",
+    "pk": 12,
+    "fields": {
+        "title": "AwesomeAlbum",
+        "slug": "awesomealbum",
+        "description": "This is an awesome Album",
+        "price": "39.99",
+        "image": "products/1158785303/1158785303.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2017-12-04T03:37:49.775Z",
+        "is_digital": true
+    }
+}
 ]
