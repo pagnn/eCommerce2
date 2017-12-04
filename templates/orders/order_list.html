@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block head_title %}Orders | {{ block.super }}{% endblock head_title %}
+{% block content%}
+<div class='row'>
+  <div class='col-12'>
+    <h1>Orders</h1>
+    <hr/>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-12'>
+    <table class='table'>
+      <thead><th>Order ID</th><th>Shipping Status</th><th>Total</th></thead>
+      <tbody>
+        {% for obj in object_list %}
+          <tr>
+            <td><a href='{{ obj.get_absolute_url }}'>{{ obj.order_id }}</a></td>
+            <td>{% if obj.status == 'shipped' %}{{ Shipped }}{% else %}Shipping Soon{% endif %}</td>
+            <td>{{ obj.total }}</td>
+          </tr>
+        {% empty %}
+        <tr><td colspan='2'><p class='lead'>No orders yet.</p></td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

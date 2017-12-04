@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head_title %}Products | {{ block.super }}{% endblock head_title%}
+{% block content %}
+<div class='container'>
+	<div class='row'>
+		<div class='col-12 col-md-6'>
+			<h1>{{ object.title }}</h1></br>
+			{{ object.timestamp|timesince }}
+			{{ object.description|linebreaks }}</br>
+			{{ object.price }}</br>
+			{% if object.image %}
+			<img src="{{ object.image.url }}">
+			{% endif %}
+		</div>
+		<div class='col-12 col-md-6'>
+			{% include 'products/snippets/update_cart.html' with product=object cart=cart %}
+		</div>
+</div>
+</div>
+{% endblock content %}
+
+

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block head_title %}Addresses | {{ block.super }}{% endblock head_title %}
+{% block content%}
+    <div class='row'>
+      <div class='col-12'>
+        <h1>Address{% if object_list.count > 1 %}es{% endif %} <a href="{% url 'address-create' %}" class='btn btn-primary'>Create New</a></h1>
+      </div>
+    </div>
+    <div class='row'>
+        {% for object in object_list %}
+        <div class='col-12 col-md-3 my-3'>
+          <div class='card'>
+            <div class='card-body'>
+              <h4 class='card-title'>{{ object.address_line_1 }} </h4>
+              <small>{{ object.address_type }}</small><br/>
+              <p class='lead'>Address</p>
+              {{ object.get_address|linebreaks }}
+              <a href='{{ object.get_absolute_url }}' class='btn btn-default' >Edit</a>
+            </div>
+          </div>
+
+        </div>       
+        {% endfor %}
+      </div>
+{% endblock content %}

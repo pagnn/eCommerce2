@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block head_title %}Detail | {{ block.super }}{% endblock head_title %}
+{% block content %}
+
+<div class='row'>
+      <div class='col-4 ml-auto mr-auto'>
+        <h1 class='py-3'>{% if title %}{{ title }}{% endif %}</h1>
+        <hr/>
+      <form method='POST' action="{% if action_url %}{{ action_url }}{% endif %}">{% csrf_token %}
+        {% if next %}
+          <input type='hidden' name='next' value='{{ next }}'>
+        {% endif %}
+        {{ form.as_p }}
+        <label for='email'>Email</label>
+        <input id='email' type='text' class='form-control disabled' value="{{ request.user.email }}" disabled="disabled">   
+        <button type='submit' class='my-3 btn btn-dafault'>Save</button><br/>
+      </form>
+        <a href="{% url 'password_change' %}">Change Password</a>      
+      </div>
+</div>
+
+{% endblock %}

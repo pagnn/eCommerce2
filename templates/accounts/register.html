@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block head_title %}Register | {{ block.super }}{% endblock head_title %}
+{% block content%}
+    <div class='text-center'>
+      <h1>Register</h1>
+    </div>
+
+    <div class='row'>
+      <div class='col-4 mx-auto'>
+      <form method='POST' action='.'>{% csrf_token %}
+        {{ form.as_p }}   
+     <div class='row'>
+      <div class='col-4 ml-auto mr-auto'>             
+        <button type='submit' class='btn btn-dafault'>Submit</button>
+      </div>
+    </div>
+      </form>
+      </div>
+    </div>
+{% endblock content %}

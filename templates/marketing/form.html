@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class='row'>
+<div class='col-6 mx-auto'>
+	{% if title %}<h1>{{ title }}</h1>{% endif %}
+	<hr/>
+  <form method='POST' action="{% if action_url %}{{ action_url }}{% endif %}">{% csrf_token %}
+        
+        {% if next %}
+          <input type='hidden' name='next' value='{{ next }}'>
+        {% endif %}
+        {{ form.as_p }}
+        <div class='row'>
+        <div class='col-4 ml-auto mr-auto'>       
+        <button type='submit' class='btn btn-dafault'>Save</button>
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+{% endblock %}

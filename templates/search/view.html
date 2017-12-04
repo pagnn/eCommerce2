@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head_title %}Products | {{ block.super }}{% endblock head_title%}
+{% block content %}
+	<div class='row mb-3'>
+		{% if request.GET.q %}
+		<div class='col-12 mb-3 text-center'>
+			<h4>Results for {{ request.GET.q }}</h4>
+			<hr/>
+		</div>
+		{% else %}
+		<div class='col-12 col-md-6 mx-auto py-5'>
+			{% include 'search/snippets/search.html' %}		
+		</div>
+		{% endif %}
+		<div class='col-12'>
+			<hr/>
+		</div>
+	</div>
+	<div class='row'>	
+				{% for obj in object_list %}
+				<div class='col'>
+					{% include 'products/snippets/card.html' with instance=obj %}
+					{% if forloop.counter|divisibleby:3 %}
+				</div></div><div class='row'>
+					{% else %}
+				</div>
+					{% endif %}
+				{% endfor %}		
+	</div>
+{% endblock content %}
+

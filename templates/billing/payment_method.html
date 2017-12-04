@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block head_title %}Payment | {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+
+<div class='col-10 col-md-6 mx-auto'>
+	<h1>Add Payment Method</h1>
+	<hr/>
+<div class='stripe-paymment-form' data-token="{{ publish_key }}" data-next-url="{% if next_url %}{{ next_url }}{% endif %}"></div>
+
+</div>
+
+{% endblock content %}
+
+
