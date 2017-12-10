@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.db import models
 from django.db.models.signals import pre_save,post_save
 from django.urls import reverse
-
+from ecommerce.aws.utils import ProtectedS3BotoStorage
 from ecommerce.utils import unique_slug_generator,get_filename
 # Create your models here.
 def get_filename_ext(filepath):
@@ -84,9 +84,11 @@ def upload_product_file_loc(instance,filename):
 		slug=unique_slug_generator(instance.product)
 	location="products/{}/".format(slug)
 	return location+filename
+
+
 class ProductFile(models.Model):
 	product = models.ForeignKey(Product)
-	file    =models.FileField(upload_to=upload_product_file_loc,storage=FileSystemStorage(location=settings.PROTECTED_ROOT))
+	file    =models.FileField(upload_to=upload_product_file_loc,storage=ProtectedS3BotoStorage())
 	free    =models.BooleanField(default=False)
 	user_required = models.BooleanField(default=False)
 

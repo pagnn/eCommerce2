@@ -164,6 +164,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static_my_proj')
 ]
 STATIC_ROOT=os.path.join(os.path.dirname(BASE_DIR),'static_cdn','static_root')
+from ecommerce.aws.conf import *
 
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(os.path.dirname(BASE_DIR),'static_cdn','media_root')
