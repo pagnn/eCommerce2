@@ -25,6 +25,7 @@ from accounts.views import GuestRegisterView,LoginView,RegisterView
 from .views import home_page,about_page,contact_page
 from addresses.views import AddressCreateView,AddressUpdateView,AddressListView,checkout_address_create_view,checkout_address_reuse_view
 from orders.views import LibraryView
+from analytics.views import SalesView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -32,6 +33,7 @@ urlpatterns = [
     url(r'^logout/$',LogoutView.as_view(),name='logout'),
     url(r'^register/$',RegisterView.as_view(),name='register'),
     url(r'^guest/$',GuestRegisterView.as_view(),name='guest'),
+    url(r'^analytics/sales/$',SalesView.as_view(),name='sales-analytics'),
     url(r'^contact/$', contact_page,name='contact'),
     url(r'^about/$', about_page,name='about'),
     url(r'^addresses/$',AddressListView.as_view(),name='addresses'),

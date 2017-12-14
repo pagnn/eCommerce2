@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block head_title %}Library | {{ block.super }}{% endblock head_title %}
+{% block content%}
+<div class='row'>
+  <div class='col-12'>
+    <h1>Sales Data</h1>
+    <hr/>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-12'>
+    <p class='leader'>Recent Orders</p>
+    <hr/>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-12'>
+    <table class='table'>
+      <thead><th>Order</th><th>Total</th><th>Updated</th></thead>
+      <tbody>
+        {% for obj in recent_qs  %}
+          <tr>
+            <td><a href='{{ obj.get_absolute_url }}'>{{ obj.order_id }}</a></td>
+            <td>{{ obj.total }}</td>
+            <td>{{ obj.updated }}</td>            
+          </tr>
+        {% empty %}
+        <tr><td colspan='1'><p class='lead'>No orders yet.</p></td></tr>
+        {% endfor %}
+        <tr><td colspan='2'>Recent Total: {{ recent_qs_total.total__sum }}</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-12'>
+    <p class='leader'>Shipped Orders</p>
+    <hr/>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-12'>
+    <table class='table'>
+      <thead><th>Order</th><th>Total</th><th>Updated</th></thead>
+      <tbody>
+        {% for obj in shipped_qs  %}
+          <tr>
+            <td><a href='{{ obj.get_absolute_url }}'>{{ obj.order_id }}</a></td>
+            <td>{{ obj.total }}</td>
+            <td>{{ obj.updated }}</td>            
+          </tr>
+        {% empty %}
+        <tr><td colspan='1'><p class='lead'>No orders yet.</p></td></tr>
+        {% endfor %}
+        <tr><td colspan='2'>Recent Total: {{ shipped_qs_total.total__sum }}</td></tr>       
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-12'>
+    <p class='leader'>Paid Orders</p>
+    <hr/>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-12'>
+    <table class='table'>
+      <thead><th>Order</th><th>Total</th><th>Updated</th></thead>
+      <tbody>
+        {% for obj in paid_qs  %}
+          <tr>
+            <td><a href='{{ obj.get_absolute_url }}'>{{ obj.order_id }}</a></td>
+            <td>{{ obj.total }}</td>
+            <td>{{ obj.updated }}</td>            
+          </tr>
+        {% empty %}
+        <tr><td colspan='1'><p class='lead'>No orders yet.</p></td></tr>
+        {% endfor %}
+        <tr><td colspan='2'>Recent Total: {{ paid_qs_total.total__sum }}</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

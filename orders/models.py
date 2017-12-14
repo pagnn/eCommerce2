@@ -1,9 +1,13 @@
 import math
+import datetime
 from django.conf import settings
 from django.db import models
 from ecommerce.utils import unique_order_id_generator
 from django.db.models.signals import pre_save,post_save
 from django.core.urlresolvers import reverse
+from django.db.models import Sum,Count,Avg
+from django.utils import timezone
+
 from carts.models import Cart
 from billing.models import BillingProfile
 from addresses.models import Address
@@ -16,6 +20,21 @@ ORDER_STATUS_CHOICES = (
 )
 # Create your models here.
 class OrderManagerQuerySet(models.query.QuerySet):
+	def recent(self):
+		return self.order_by('updated','timestamp')
+	def by_range(self,start_date,end_date=None):
+		if end_date is None:
+			return self.filter(updated__gte=start_date)
+		return self.filter(updated__gte=start_date).filter(updated__lte=end_date)
+	def by_date(self):
+		return self.filter(updated__day=timezone.now().day)
+	def total_data(self):
+		return self.aggregate(Sum('total'),Avg('total'))
+	def cart_data(self):
+		return self.aggregate(Sum('cart__products__price'),Avg('cart__products__price'),Count('cart__products'))
+	def by_status(self,status='shipped'):
+		return self.filter(status=status)
+
 	def by_billing_profile(self,request):
 		my_profile,created=BillingProfile.objects.new_or_get(request)
 		return self.filter(billing_profile=my_profile)
@@ -24,6 +43,8 @@ class OrderManagerQuerySet(models.query.QuerySet):
 class OrderManager(models.Manager):
 	def get_queryset(self):
 		return OrderManagerQuerySet(self.model,using=self._db)
+	def recent(self):
+		return self.get_queryset().recent()
 	def by_billing_profile(self,request):
 		return self.get_queryset().by_billing_profile(request)
 	def new_or_get(self,billing_profile,cart_obj):

@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.views.generic import ListView,DetailView,View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404,JsonResponse
-
+from django.utils import timezone
+import datetime
 from .models import Order,ProductPurchase
 from billing.models import BillingProfile
 # Create your views here.

@@ -2,7 +2,7 @@
 from django.contrib import messages
 from django.shortcuts import render,get_object_or_404,redirect
 from django.views.generic import ListView,DetailView,View
-from django.http import Http404,HttpResponse
+from django.http import Http404,HttpResponse,HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 
@@ -88,25 +88,27 @@ class ProductDownloadView(View):
 			can_download=True
 		else:
 			purchased_products=ProductPurchase.objects.products_by_request(request)
-			print(download_obj)
-			print(purchased_products)
 			if product_obj in purchased_products:
 				can_download=True
 		if not can_download or not user_ready:
 			messages.error(request,"You do not have access to this item.")
 			return redirect(download_obj.get_default_url())	
-		file_root=settings.PROTECTED_ROOT
-		filepath=download_obj.file.path
-		file_filepath=os.path.join(file_root,filepath)
-		with open(file_filepath,'rb') as f:
-			wrapper=FileWrapper(f)
-			mimetype='application/force-download'
-			guess_mimetype=guess_type(filepath)[0]
-			if guess_mimetype:
-				mimetype=guess_mimetype
-			response=HttpResponse(wrapper,content_type=mimetype)
-			response['Content-Disposition']='attachment;filename=%s'%(download_obj.name)
-			response['X-SendFile']='%s.txt'%(download_obj.name)
-		return response
+
+		aws_filepath=download_obj.generate_download_url()
+		print(aws_filepath)
+		return HttpResponseRedirect(aws_filepath)
+		# file_root=settings.PROTECTED_ROOT
+		# filepath=download_obj.file.path
+		# file_filepath=os.path.join(file_root,filepath)
+		# with open(file_filepath,'rb') as f:
+		# 	wrapper=FileWrapper(f)
+		# 	mimetype='application/force-download'
+		# 	guess_mimetype=guess_type(filepath)[0]
+		# 	if guess_mimetype:
+		# 		mimetype=guess_mimetype
+		# 	response=HttpResponse(wrapper,content_type=mimetype)
+		# 	response['Content-Disposition']='attachment;filename=%s'%(download_obj.name)
+		# 	response['X-SendFile']='%s.txt'%(download_obj.name)
+		# return response
 		
 
